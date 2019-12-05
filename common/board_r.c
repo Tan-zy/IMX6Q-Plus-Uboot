@@ -534,7 +534,7 @@ static int initr_env(void)
 	printf("bootsystem:%s\n", p);
 	if(!strcmp(p, "android"))
 	{
-		sprintf(bootargs, "console=ttymxc3,115200 androidboot.console=ttymxc3 consoleblank=0 vmalloc=256M init=/init %s androidboot.hardware=freescale cma=384M", displayArgs);
+		sprintf(bootargs, "console=ttymxc0,115200 androidboot.console=ttymxc0 consoleblank=0 vmalloc=256M init=/init %s androidboot.hardware=freescale cma=384M", displayArgs);
 
 
 		//setenv("bootcmd", "fatload mmc 2:1 0x12000000 boot.img;boota 0x12000000");
@@ -558,28 +558,26 @@ static int initr_env(void)
 	else if((!strcmp(p, "qt"))
 		|| (!strcmp(p, "ubuntu")))
 	{
-		sprintf(bootargs, "console=ttymxc3,115200 androidboot.console=ttymxc3 consoleblank=0 vmalloc=256M %s root=/dev/mmcblk3p2 rootwait rw", displayArgs);
+		sprintf(bootargs, "console=ttymxc0,115200 androidboot.console=ttymxc0 consoleblank=0 vmalloc=256M %s root=/dev/mmcblk3p2 rootwait rw", displayArgs);
 
 		if(0 == lcd_flags)//9.7 inch
 		{
-			setenv("bootcmd", "fatload mmc 2:1 0x12000000 topeet_9.7inch.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
+			setenv("bootcmd", "fatload mmc 2:1 0x12000000 imx6qp-topeet.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
 		}
 		else if(1 == lcd_flags)//7 inch
 		{
-			setenv("bootcmd", "fatload mmc 2:1 0x12000000 topeet_7inch.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
+			setenv("bootcmd", "fatload mmc 2:1 0x12000000 imx6qp-topeet.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
 		}
 		else if(2 == lcd_flags)//10.1 inch
 		{
-			setenv("bootcmd", "fatload mmc 2:1 0x12000000 topeet_10.1inch.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
+			setenv("bootcmd", "fatload mmc 2:1 0x12000000 imx6qp-topeet.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
 		}
 		else
 		{
-			setenv("bootcmd", "fatload mmc 2:1 0x12000000 topeet_9.7inch.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
+			setenv("bootcmd", "fatload mmc 2:1 0x12000000 imx6qp-topeet.dtb;fatload mmc 2:1 0x13000000 zImage;bootz 0x13000000 - 0x12000000");
 		}
 	}
 
-        //sprintf(bootargs, "console=ttymxc3,115200 androidboot.console=ttymxc3 consoleblank=0 vmalloc=256M init=/init %s androidboot.hardware=freescale cma=384M androidboot.serialno=100fa9d4e315e290", displayArgs);
-	//sprintf(bootargs, "console=ttymxc3,115200 androidboot.console=ttymxc3 consoleblank=0 vmalloc=256M init=/init %s androidboot.hardware=freescale cma=384M", displayArgs);
         setenv("bootargs", bootargs);
 
         printf("bootargs=%s\n", bootargs);
